@@ -48,6 +48,13 @@ rtm.on(RTM_EVENTS.MESSAGE, function(message) {
       _notify(sub, `<@${message.user}> has joined <#${message.channel}>`);
     });
   }
+  
+  // notify when someone joins the channel
+  if (message.subtype == "channel_left") {
+    subscribers.forEach(function(sub) {
+      _notify(sub, `<@${message.user}> has left <#${message.channel}>`);
+    });
+  }
 });
 
 //
