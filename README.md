@@ -1,12 +1,12 @@
-# Nanobox Slackbot (nanobot)
+# slackbot-joinchannelnotifications
 
-Nanobot is a very simple Slack bot with one purpose (atm). Notify users when someone joins a channel.
+This bot notifies users or channels when someone joins a channel the bot is present in.  Small fork of https://github.com/nanobox-io/nanobox-slackbot, basically just adding instructions for running via docker instead.
 
 **HEADS UP** - A Slack bot must be *invited* (`/invite @bot_name`) to a channel before it can listen for events in that channel.
 
 ## Environment Variables
 
-Nanobot makes use of two environment variables:
+The bot makes use of two environment variables:
 
 ```bash
 # This is your Slack bot api token.
@@ -21,27 +21,15 @@ SUBSCRIBERS=@username #channel etc.
 
 ```bash
 # clone the code
-git clone https://github.com/nanobox-io/nanobox-slackbot.git
+git clone https://github.com/benjaminjbachman/slackbot-joinchannelnotifications.git
 
 # cd into the app
-cd nanobox-slackbot
+cd slackbot-joinchannelnotifications
+
+# edit run.sh to add your api key and the users/channels to receive notifications
+vi run.sh
+
+# run via docker
+docker run -d --restart always -it --name slackbot-joinchannelnotifications -v "$PWD":/usr/src/app -w /usr/src/app node:10 bash /usr/src/app/run.sh
+
 ```
-
-### Locally
-
-```bash
-# add your slack bot api token
-nanobox add evar local BOT_API_TOKEN=slackbot-api-token
-
-# add your notify users
-nanobox add evar local SUBSCRIBERS=@username #channel etc.
-
-# run the app
-nanobox run node index.js
-```
-
-### In Production
-
-To run nanobot in production follow the guides on <a href="http://guides.nanobox.io/nodejs/generic/launch-your-app/", target="\_blank">launching a nodejs app with nanobox</a>.
-
-**HEADS UP** - Make sure you <a href="http://guides.nanobox.io/nodejs/generic/production-evars/", target="\_blank">add the environment variables</a> from above via your dashboard.
