@@ -49,7 +49,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function(message) {
     });
   }
   
-  // notify when someone joins the channel
+  // notify when someone left the channel
   if (message.subtype == "channel_left") {
     subscribers.forEach(function(sub) {
       _notify(sub, `<@${message.user}> has left <#${message.channel}>`);
